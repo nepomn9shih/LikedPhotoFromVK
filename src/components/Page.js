@@ -15,7 +15,7 @@ export class Page extends React.Component {
     }
     
     return yearList.map((year, index) => {
-      return (<button id="index" className="btn btn-info m-2" onClick={this.onBtnClick}>{year}</button>)
+      return (<button id="index" className="btn btn-info m-2 shadow" onClick={this.onBtnClick}>{year}</button>)
     })
   }
 
@@ -23,17 +23,17 @@ export class Page extends React.Component {
     const { photos, isFetching, error } = this.props
 
     if (error) {
-      return <p className="error card bg-alert">Во время загрузки фото произошла ошибка</p>
+      return <p className="error shadow card bg-alert">Во время загрузки фото произошла ошибка</p>
     }
 
     if (isFetching) {
-      return <p className="card bg-warning text-center p-2 m-2">Загрузка...</p>
+      return <p className="card shadow bg-warning text-center p-2 m-2">Загрузка...</p>
     } else {
       return (
         <div className="bg-dark p-2">
         <div className="d-flex justify-content-between align-items-end flex-wrap">
         {photos.map(entry => ( 
-        <div key={entry.id} className="photo card mt-2 mx-1">
+        <div key={entry.id} className="photo shadow card mt-2 mx-1">
           <p>
             <img className="p-2" src={entry.sizes[0].url} alt="" />
           </p>
@@ -53,9 +53,11 @@ export class Page extends React.Component {
         <p className="d-flex flex-wrap">
         { this.addYearList(2020, 2008) }
         </p>
-        <h3 className="card bg-secondary text-center p-2 m-2">
-          {year} год [{photos.length}]
-        </h3>
+        <div className="card shadow bg-secondary p-2 m-2">
+          <div className="d-flex justify-content-center">
+            <span><h3>{year} год</h3></span><span className="badge badge-light ml-2"><h3>{photos.length}</h3></span>
+          </div>
+        </div>
         {this.renderTemplate()}
       </div>
     )

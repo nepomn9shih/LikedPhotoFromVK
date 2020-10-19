@@ -25,7 +25,7 @@ export class User extends React.Component {
   }
   render() {
     return <div className="ib user">
-    <div className="card bg-secondary ml-4">{this.renderTemplate()}</div>
+    <div className="card bg-secondary ml-4 shadow">{this.renderTemplate()}</div>
     </div>
   }
 }
