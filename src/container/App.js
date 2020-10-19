@@ -9,6 +9,7 @@ class App extends Component {
   render() {
     const { user, page, getPhotosAction, handleLoginAction } = this.props
     return (
+      <div className="card bg-dark m-3">
       <div className="app">
         {/* добавили error prop для Page */}
         <Page
@@ -25,6 +26,7 @@ class App extends Component {
           error={user.error}
           handleLogin={handleLoginAction}
         />
+      </div>
       </div>
     )
   }

@@ -7,64 +7,53 @@ export class Page extends React.Component {
     this.props.getPhotos(year) // setYear -> getPhotos
   }
 
+  addYearList = (end, start) => {
+    const yearList = []
+    
+    for (let i=end; i >= start; i--) {
+      yearList.push(i)
+    }
+    
+    return yearList.map((year, index) => {
+      return (<button id="index" className="btn btn-info m-2" onClick={this.onBtnClick}>{year}</button>)
+    })
+  }
+
   renderTemplate = () => {
     const { photos, isFetching, error } = this.props
 
     if (error) {
-      return <p className="error">Во время загрузки фото произошла ошибка</p>
+      return <p className="error card bg-alert">Во время загрузки фото произошла ошибка</p>
     }
 
     if (isFetching) {
-      return <p>Загрузка...</p>
+      return <p className="card bg-warning text-center p-2 m-2">Загрузка...</p>
     } else {
-      return photos.map(entry => ( 
-        <div key={entry.id} className="photo">
+      return (
+        <div className="bg-dark p-2">
+        <div className="d-flex justify-content-between align-items-end flex-wrap">
+        {photos.map(entry => ( 
+        <div key={entry.id} className="photo card mt-2 mx-1">
           <p>
-            <img src={entry.sizes[0].url} alt="" />
+            <img className="p-2" src={entry.sizes[0].url} alt="" />
           </p>
-          <p>{entry.likes.count} ❤</p>
+          <p className="text-center">{entry.likes.count} ❤</p>
         </div>
-      ))
+      ))}
+      </div>
+      </div>
+      )
     }
   }
 
   render() {
     const { year, photos} = this.props // вытащили isFetching
     return (
-      <div className="ib page">
-        <p>
-        <button className="btn btn-warning" onClick={this.onBtnClick}>
-            2020
-          </button>{' '}
-          <button className="btn btn-info" onClick={this.onBtnClick}>
-            2019
-          </button>{' '}
-          <button className="btn btn-info" onClick={this.onBtnClick}>
-            2018
-          </button>{' '}
-          <button className="btn btn-info" onClick={this.onBtnClick}>
-            2017
-          </button>{' '}
-          <button className="btn btn-info" onClick={this.onBtnClick}>
-            2016
-          </button>{' '}
-          <button className="btn btn-info" onClick={this.onBtnClick}>
-            2015
-          </button>{' '}
-          <button className="btn btn-info" onClick={this.onBtnClick}>
-            2014
-          </button>{' '}
-          <button className="btn btn-info" onClick={this.onBtnClick}>
-            2013
-          </button>{' '}
-          <button className="btn btn-info" onClick={this.onBtnClick}>
-            2012
-          </button>{' '}
-          <button className="btn btn-info" onClick={this.onBtnClick}>
-            2011
-          </button>
+      <div className="ib page bg-dark">
+        <p className="d-flex flex-wrap">
+        { this.addYearList(2020, 2008) }
         </p>
-        <h3>
+        <h3 className="card bg-secondary text-center p-2 m-2">
           {year} год [{photos.length}]
         </h3>
         {this.renderTemplate()}
